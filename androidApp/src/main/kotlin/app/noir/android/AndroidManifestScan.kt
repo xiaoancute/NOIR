@@ -53,12 +53,18 @@ object AndroidManifestScan {
 
         ManifestSummary(
             exportedWithoutPermission = exportedWithoutPermission,
-            cleartext = application?.attrs?.get("usesCleartextTraffic")?.toBooleanOrNull(),
-            allowBackup = application?.attrs?.get("allowBackup")?.toBooleanOrNull(),
-            debuggable = application?.attrs?.get("debuggable")?.toBooleanOrNull(),
+            cleartext = application?.attrs?.get("usesCleartextTraffic").toBooleanValue(),
+            allowBackup = application?.attrs?.get("allowBackup").toBooleanValue(),
+            debuggable = application?.attrs?.get("debuggable").toBooleanValue(),
             targetSdk = sdk?.attrs?.get("targetSdkVersion")
         )
     }.getOrNull()
+
+    private fun String?.toBooleanValue(): Boolean? = when (this) {
+        "true" -> true
+        "false" -> false
+        else -> null
+    }
 
     private object Axml {
         data class Node(val name: String, val attrs: Map<String, String?>, val depth: Int)

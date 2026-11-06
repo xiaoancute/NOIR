@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -108,7 +109,7 @@ class MainActivity : Activity() {
         }
         val scroll = ScrollView(this).apply {
             isFillViewport = true
-            addView(output, ScrollView.LayoutParams(-1, -2))
+            addView(output, ViewGroup.LayoutParams(-1, -2))
         }
         page.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         return page
