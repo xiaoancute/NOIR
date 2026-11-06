@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "NOIR"
-include(":core", ":cli")
+include(":core", ":cli", ":androidApp")

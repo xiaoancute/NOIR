@@ -172,6 +172,27 @@ cd NOIR
 ./cli/build/install/noir/bin/noir --about
 ```
 
+## Android Root 版（实验性）
+
+仓库现在包含一个第一版 Android 扫描器：`androidApp`。它只面向已经获得
+Root 的手机，通过 `su` 读取本机的 `pm` / `dumpsys package`，扫描所有声明
+`INTERNET` 的应用，并读取 base APK 与 split APK 中的 DEX URL、Manifest
+风险和敏感权限。
+
+```bash
+./gradlew :androidApp:assembleDebug
+adb install androidApp/build/outputs/apk/debug/androidApp-debug.apk
+```
+
+打开 NOIR 后在 Root 管理器中授予权限，点击 `SCAN DEVICE`。结果只写在应用
+私有目录和你主动选择的导出位置，不会上传扫描内容。当前 Android 第一版
+包含静态扫描、分类、评分、报告导出；实时流量、证书安装、HTTPS MITM、
+AppOps 自动处置和 pinning 处理仍在后续版本。
+
+Android 版会扫描所有网络应用，而不是只筛选敏感权限应用。这样不会漏掉
+只有 `INTERNET` 权限但内含广告、统计或崩溃上报 SDK 的应用；敏感权限仍然
+用于风险评分和数据流关联。
+
 ## 构建
 
 ```bash

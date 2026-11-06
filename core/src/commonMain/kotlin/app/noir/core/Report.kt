@@ -39,6 +39,10 @@ object Report {
             sb.append("      \"category\": \"").append(esc(a.category.label)).append("\",\n")
             sb.append("      \"vendor\": ").append(a.vendor?.let { "\"${esc(it)}\"" } ?: "null").append(",\n")
             sb.append("      \"sharedUid\": ").append(a.sharedUid?.let { "\"${esc(it)}\"" } ?: "null").append(",\n")
+            sb.append("      \"exportedWithoutPermission\": ").append(a.exportedWithoutPermission).append(",\n")
+            sb.append("      \"cleartext\": ").append(a.cleartext?.toString() ?: "null").append(",\n")
+            sb.append("      \"allowBackup\": ").append(a.allowBackup?.toString() ?: "null").append(",\n")
+            sb.append("      \"targetSdk\": ").append(a.targetSdk?.let { "\"${esc(it)}\"" } ?: "null").append(",\n")
             sb.append("      \"dataTypes\": ").append(array(a.dataTypes.map { it.label })).append(",\n")
             sb.append("      \"leaks\": ").append(leaksJson(a)).append(",\n")
             sb.append("      \"score\": ").append(a.score).append(",\n")
@@ -131,6 +135,10 @@ object Report {
             sb.append(" · category: ").append(a.category.label)
             sb.append(" · vendor: ").append(a.vendor ?: "unknown")
             sb.append(" · shared uid: ").append(a.sharedUid ?: "—").append("\n")
+            sb.append("- manifest: exported without permission=").append(a.exportedWithoutPermission)
+                .append(" · cleartext=").append(a.cleartext ?: "unknown")
+                .append(" · backup=").append(a.allowBackup ?: "unknown")
+                .append(" · targetSdk=").append(a.targetSdk ?: "unknown").append("\n")
             if (a.dataTypes.isNotEmpty()) {
                 sb.append("- data: ").append(a.dataTypes.joinToString(", ") { it.label }).append("\n")
             }

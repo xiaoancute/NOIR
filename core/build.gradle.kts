@@ -1,9 +1,11 @@
 plugins {
     kotlin("multiplatform")
+    id("com.android.library")
 }
 
 kotlin {
     jvm()
+    androidTarget()
 
     sourceSets {
         val commonMain by getting
@@ -14,4 +16,9 @@ kotlin {
             }
         }
     }
+}
+
+android {
+    namespace = "app.noir.core"
+    compileSdk = 35
 }

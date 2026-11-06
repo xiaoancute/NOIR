@@ -32,7 +32,11 @@ data class AppEntry(
     val score: Int,
     val category: Category = Category.OTHER,
     val vendor: String? = null,
-    val sharedUid: String? = null
+    val sharedUid: String? = null,
+    val exportedWithoutPermission: Int = 0,
+    val cleartext: Boolean? = null,
+    val allowBackup: Boolean? = null,
+    val targetSdk: String? = null
 ) {
     val uploadEndpoints: List<String> get() = endpoints.filter { Rules.isUpload(it) }
     val commandEndpoints: List<String> get() = endpoints.filter { Rules.isCommand(it) }
